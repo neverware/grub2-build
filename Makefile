@@ -1,4 +1,4 @@
-PY_FILES=*.py
+PY_FILES=*.py container/*.py
 
 all: fmt lint
 
