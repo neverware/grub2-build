@@ -42,7 +42,30 @@ def main():
         cwd=build_dir)
     # yapf: enable
 
-    run('make', '--jobs', args.jobs, cwd=build_dir)
+    run('make', '--jobs', str(args.jobs), cwd=build_dir)
+    run('make', 'install', cwd=build_dir)
+
+    # These args are copied from upstream:
+    # https://chromium.googlesource.com/chromiumos/platform/crosutils/+/c2e13fd6594226881b2830e9d6428069fdfa2cee/build_library/create_legacy_bootloader_templates.sh
+    # yapf: disable
+    run('grub-mkimage',
+        '-O', args.target + '-efi',
+        '-o', os.path.join(build_dir, 'boot.efi'),
+        '-p', '/efi/boot',
+        'boot',
+        'chain',
+        'configfile',
+        'efi_gop',
+        'ext2',
+        'fat',
+        'gptpriority',
+        'hfs',
+        'hfsplus',
+        'linux',
+        'normal',
+        'part_gpt',
+        'test')
+    # yapf: enable
 
 
 if __name__ == '__main__':
