@@ -31,6 +31,10 @@ def main():
         '--disable-nls',
         '--program-prefix=',
 
+        # This flag was added by Fedora in ee5038ddf3b7d91, set it to
+        # host to fix missing header errors
+        '--with-utils=host',
+
         # Only build EFI; we use syslinux for legacy boot
         '--with-platform=efi',
 
