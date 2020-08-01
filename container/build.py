@@ -17,6 +17,8 @@ def main():
     build_dir = os.path.join('/build', 'grub-' + args.target)
     os.mkdir(build_dir)
 
+    # TODO: re-enable werror
+
     # yapf: disable
     run('/build/grub-src/configure',
 
@@ -34,6 +36,9 @@ def main():
         # This flag was added by Fedora in ee5038ddf3b7d91, set it to
         # host to fix missing header errors
         '--with-utils=host',
+
+        # Disable the rpm-sort module added by redhat
+        '--enable-rpm-sort=no',
 
         # Only build EFI; we use syslinux for legacy boot
         '--with-platform=efi',

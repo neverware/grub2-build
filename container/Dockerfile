@@ -3,8 +3,6 @@ FROM debian:10.4-slim
 ARG GRUB_BRANCH
 ARG GNULIB_REVISION
 
-# Note: librpm-dev is needed because the "--enable-rpm-sort=no"
-# configure flag does not properly disable the rpm-sort module.
 RUN apt-get update && apt-get install -y \
     autoconf \
     automake \
@@ -13,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     flex \
     gettext \
     git \
-    librpm-dev \
     libtool \
     make \
     pkg-config \
