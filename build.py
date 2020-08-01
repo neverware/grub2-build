@@ -28,7 +28,7 @@ def main():
     # yapf: enable
 
     # TODO: other target
-    run('docker', 'run', image, 'python3', '/build/build.py', 'x86_64')
+    run('docker', 'run', image, 'python3', '-u', '/build/build.py', 'x86_64')
 
 
 if __name__ == '__main__':
