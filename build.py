@@ -16,7 +16,7 @@ def main():
     image = 'grub-build'
     # This revision should match the tip of neverware-fedora33. It is
     # pinned here to ensure the build is reproducible.
-    grub_branch = '1dbbd0d0003ff5ed2082ee632e46aa3135b5d925'
+    grub_revision = '1dbbd0d0003ff5ed2082ee632e46aa3135b5d925'
     # This revision is newer than what fedora-33 appears to be
     # pointing to (d271f868a8 in a comment in the bootstrap.conf
     # file). We need at least b7e213c072 to pull in a build fix. There
@@ -26,7 +26,7 @@ def main():
 
     # yapf: disable
     run('docker', 'build',
-        '--build-arg', 'GRUB_BRANCH=' + grub_branch,
+        '--build-arg', 'GRUB_REVISION=' + grub_revision,
         '--build-arg', 'GNULIB_REVISION=' + gnulib_revision,
         '--tag', image,
         '--file', os.path.join(container_dir, 'Dockerfile'),
