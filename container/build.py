@@ -17,14 +17,11 @@ def main():
     build_dir = os.path.join('/build', 'grub-' + args.target)
     os.mkdir(build_dir)
 
-    # TODO: re-enable werror
-
     # yapf: disable
     run('/build/grub-src/configure',
 
         # These args are copied from the chromiumos grub ebuild:
         # https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/94083d19b84e55243e455d06bd6ccd8890821e0d/sys-boot/grub/grub-2.02.ebuild
-        '--disable-werror',
         '--disable-grub-mkfont',
         '--disable-grub-mount',
         '--disable-device-mapper',
