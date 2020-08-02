@@ -1,8 +1,5 @@
 FROM debian:10.4-slim
 
-ARG GRUB_BRANCH
-ARG GNULIB_REVISION
-
 RUN apt-get update && apt-get install -y \
     autoconf \
     automake \
@@ -15,6 +12,9 @@ RUN apt-get update && apt-get install -y \
     make \
     pkg-config \
     python3
+
+ARG GRUB_BRANCH
+ARG GNULIB_REVISION
 
 WORKDIR /build
 RUN git clone -b $GRUB_BRANCH \
