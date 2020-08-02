@@ -14,9 +14,9 @@ def main():
     container_dir = os.path.join(repo_dir, 'container')
 
     image = 'grub-build'
-    # TODO: might want to pin this to a particular commit and leave
-    # the branch name in a comment
-    grub_branch = 'neverware-fedora33'
+    # This revision should match the tip of neverware-fedora33. It is
+    # pinned here to ensure the build is reproducible.
+    grub_branch = '1dbbd0d0003ff5ed2082ee632e46aa3135b5d925'
     # This revision is newer than what fedora-33 appears to be
     # pointing to (d271f868a8 in a comment in the bootstrap.conf
     # file). We need at least b7e213c072 to pull in a build fix. There
