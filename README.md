@@ -1,4 +1,4 @@
-# grub-build
+# grub2-build
 
 Note: this repo is public to assist with shim review.
 
