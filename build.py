@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
+"""Build grub for EFI."""
 
 import os
 import subprocess
 
 
 def run(*cmd):
+    """Print and run a command via subprocess."""
     print(' '.join(cmd))
     subprocess.run(cmd, check=True)
 
 
 def main():
+    """Build grub for EFI."""
     repo_dir = os.path.dirname(os.path.realpath(__file__))
     output_dir = os.path.join(repo_dir, 'output')
 
