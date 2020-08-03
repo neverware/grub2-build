@@ -4,6 +4,9 @@
 import os
 import subprocess
 
+REPO_DIR = os.path.dirname(os.path.realpath(__file__))
+OUTPUT_DIR = os.path.join(REPO_DIR, 'output')
+
 
 def run(*cmd):
     """Print and run a command via subprocess."""
@@ -13,9 +16,6 @@ def run(*cmd):
 
 def main():
     """Build grub for EFI."""
-    repo_dir = os.path.dirname(os.path.realpath(__file__))
-    output_dir = os.path.join(repo_dir, 'output')
-
     image = 'grub-build'
     # This revision should match the tip of neverware-fedora33. It is
     # pinned here to ensure the build is reproducible.
@@ -28,8 +28,8 @@ def main():
     gnulib_revision = '229f262054f003814157c3715a7f33ddfd87d43c'
 
     # Ensure an empty output directory exists
-    run('sudo', 'rm', '-rf', output_dir)
-    os.mkdir(output_dir)
+    run('sudo', 'rm', '-rf', OUTPUT_DIR)
+    os.mkdir(OUTPUT_DIR)
 
     targets = {
         'x86_64': 'grubx64.efi',
@@ -44,11 +44,11 @@ def main():
             '--build-arg', 'GNULIB_REVISION=' + gnulib_revision,
             '--build-arg', 'JOBS=' + str(os.cpu_count()),
             '--tag', image,
-            '--file', os.path.join(repo_dir, 'Dockerfile'),
-            repo_dir)
+            '--file', os.path.join(REPO_DIR, 'Dockerfile'),
+            REPO_DIR)
 
         run('docker', 'run',
-            '--mount', 'type=bind,src={},dst=/host'.format(output_dir),
+            '--mount', 'type=bind,src={},dst=/host'.format(OUTPUT_DIR),
             image,
             'cp', '/build/boot.efi', os.path.join('/host', output_name))
         # yapf: enable
