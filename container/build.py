@@ -53,8 +53,9 @@ def main():
 
     # These args are copied from upstream:
     # https://chromium.googlesource.com/chromiumos/platform/crosutils/+/c2e13fd6594226881b2830e9d6428069fdfa2cee/build_library/create_legacy_bootloader_templates.sh
+    # TODO: seems likely we can drop some of these modules
     # yapf: disable
-    run('grub-mkimage',
+    run('/build/install/bin/grub-mkimage',
         '-O', args.target + '-efi',
         '-o', os.path.join(build_dir, 'boot.efi'),
         '-p', '/efi/boot',
