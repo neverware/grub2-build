@@ -23,5 +23,7 @@ with secure boot enabled.
 
 ## TODO
 
-Describe details of where the sources come from and what patches
-we apply on top.
+- Describe details of where the sources come from and what patches we
+  apply on top.
+  
+- Check if any modules in the call to grub-mkimage can be dropped.
