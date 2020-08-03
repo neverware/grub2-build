@@ -17,12 +17,12 @@ RUN dnf install -y \
     redhat-rpm-config
 
 WORKDIR /build
+ARG GRUB_REVISION
 RUN git clone \
     https://github.com/neverware/chromiumos-grub2.git \
     grub-src
 WORKDIR grub-src
 
-ARG GRUB_REVISION
 RUN git checkout ${GRUB_REVISION}
 
 ARG GNULIB_REVISION
