@@ -1,17 +1,20 @@
-FROM debian:10.4-slim
+FROM fedora:32
 
-RUN apt-get update && apt-get install -y \
+# redhat-rpm-config is needed here because of a2956cf47d in the redhat
+# gnulib repo. This in turn implies that we need to use a fedora image
+# rather than, say, debian-slim.
+RUN dnf install -y \
     autoconf \
     automake \
-    autopoint \
     bison \
     flex \
-    gettext \
+    gettext-devel \
     git \
     libtool \
     make \
     pkg-config \
-    python3
+    python3 \
+    redhat-rpm-config
 
 WORKDIR /build
 RUN git clone \
