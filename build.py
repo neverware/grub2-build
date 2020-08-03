@@ -19,10 +19,10 @@ def main():
     grub_revision = '1dbbd0d0003ff5ed2082ee632e46aa3135b5d925'
     # This revision is newer than what fedora-33 appears to be
     # pointing to (d271f868a8 in a comment in the bootstrap.conf
-    # file). We need at least b7e213c072 to pull in a build fix. There
-    # are some newer fixes on top of that (in the fixes branch) but
-    # they introduce new compilation errors.
-    gnulib_revision = 'b7e213c072670ca78ebcdcc4853ece9c2452ee82'
+    # file). We need at least b7e213c072 to pull in a build fix. The
+    # newer fixes on top of that (in the fixes branch) are needed to
+    # fix some warnings.
+    gnulib_revision = '229f262054f003814157c3715a7f33ddfd87d43c'
 
     # yapf: disable
     run('docker', 'build',
