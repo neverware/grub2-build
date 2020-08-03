@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
-"""Package the grub builds and upload to S3."""
+"""Upload the tarball to S3."""
 
-import datetime
+import glob
 import os
 
-from build import run, OUTPUT_DIR, REPO_DIR
+from build import run, OUTPUT_DIR
 
 
 def main():
-    """Package the grub builds and upload to S3."""
-    now = datetime.datetime.now()
-    tar_name = 'grub-unsigned-{}.tar'.format(now.strftime("%d%m%Y-%H%M%S"))
-    tar_path = os.path.join(REPO_DIR, tar_name)
-    run('tar', '-C', OUTPUT_DIR, '-cf', tar_path, '.')
-
+    """Upload the tarball to S3."""
     s3_bucket = 'neverware-grub'
-    run('aws', 's3', 'cp', tar_path, 's3://{}/{}'.format(s3_bucket, tar_name))
+    tar_path = glob.glob(os.path.join(OUTPUT_DIR, '*.tar.gz'))[0]
+    run('aws', 's3', 'cp', tar_path, 's3://{}/'.format(s3_bucket))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build grub for EFI."""
 
+import hashlib
 import os
 import subprocess
 
@@ -52,6 +53,19 @@ def main():
             image,
             'cp', '/build/boot.efi', os.path.join('/host', output_name))
         # yapf: enable
+
+    # Hash the outputs in sorted order to produce a stable hash
+    hasher = hashlib.sha256()
+    for file_name in sorted(targets.values()):
+        with open(os.path.join(OUTPUT_DIR, file_name), 'rb') as rfile:
+            hasher.update(rfile.read())
+
+    # Create a tarball of the outputs
+    tar_name = 'grub-unsigned-{}.tar.gz'.format(hasher.hexdigest())
+    tar_path = os.path.join(OUTPUT_DIR, tar_name)
+    tar_cmd = ['tar', '-C', OUTPUT_DIR, '-czvf', tar_path]
+    tar_cmd += targets.values()
+    run(*tar_cmd)
 
 
 if __name__ == '__main__':
