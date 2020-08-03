@@ -33,8 +33,8 @@ def main():
         container_dir)
     # yapf: enable
 
-    # TODO: other target
-    run('docker', 'run', image, 'python3', '-u', '/build/build.py', 'x86_64')
+    for target in ('x86_64', 'i386'):
+        run('docker', 'run', image, 'python3', '-u', '/build/build.py', target)
 
 
 if __name__ == '__main__':
