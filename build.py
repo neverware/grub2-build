@@ -34,7 +34,15 @@ def main():
     # yapf: enable
 
     for target in ('x86_64', 'i386'):
-        run('docker', 'run', image, 'python3', '-u', '/build/build.py', target)
+        # yapf: disable
+        run('docker', 'run',
+            '--mount', 'type=bind,source={},destination={}'.format(
+                'output',
+                '/host',
+            ),
+            image,
+            'python3', '-u', '/build/build.py', target)
+        # yapf: enable
 
 
 if __name__ == '__main__':
