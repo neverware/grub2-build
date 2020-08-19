@@ -20,7 +20,7 @@ def main():
     image = 'grub-build'
     # This revision should match the tip of neverware-fedora33. It is
     # pinned here to ensure the build is reproducible.
-    grub_revision = '81e7a8a4c2fa2280de9626739858b5fe5d0b11e2'
+    grub_revision = 'e37e9ced05e7406b60ef8df401126f0c65de4399'
     # This revision is newer than what fedora-33 appears to be
     # pointing to (d271f868a8 in a comment in the bootstrap.conf
     # file). We need at least b7e213c072 to pull in a build fix. The
